@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Sanaa</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Georgia', serif;
+      background: radial-gradient(ellipse at center, #1a1a2e 0%, #000000 100%);
+      color: white;
+    }
+
+    h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 2.5rem;
+      z-index: 10;
+      color: #ffb6c1;
+      text-shadow: 2px 2px 8px #ff69b4;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.8;
+      animation: float infinite ease-in-out;
+    }
+
+    .star {
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 20px solid #fffacd;
+      transform: rotate(35deg);
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background-color: #ff69b4;
+      transform: rotate(-45deg);
+      position: relative;
+      animation-delay: 0.5s;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    .diamond {
+      width: 20px;
+      height: 20px;
+      background: #b9f2ff;
+      transform: rotate(45deg);
+    }
+
+    .circle {
+      width: 20px;
+      height: 20px;
+      background: #add8e6;
+      border-radius: 50%;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0) rotate(360deg);
+        opacity: 0.6;
+      }
+    }
+
+    #loveNoteBtn {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      background: #ff69b4;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 20;
+      box-shadow: 0 0 10px #ffb6c1;
+    }
+
+    #noteBox {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 90%;
+      color: #fff;
+      font-size: 1.1rem;
+      backdrop-filter: blur(5px);
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    You’re the stars in my night,<br>
+    the heart in my chest,<br>
+    the diamond in my sky,<br>
+    and the circle that keeps me whole.
+  </h1>
+
+  <button id="loveNoteBtn">Click for a Love Note 💌</button>
+  <div id="noteBox"></div>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_14a0cf7ee0.mp3?filename=love-theme-144276.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const shapes = ['star', 'heart', 'diamond', 'circle'];
+
+    function createShape() {
+      const shape = document.createElement('div');
+      const type = shapes[Math.floor(Math.random() * shapes.length)];
+      shape.classList.add('shape', type);
+
+      const size = Math.random() * 20 + 10;
+      shape.style.width = size + 'px';
+      shape.style.height = size + 'px';
+
+      shape.style.top = Math.random() * window.innerHeight + 'px';
+      shape.style.left = Math.random() * window.innerWidth + 'px';
+      shape.style.animationDuration = Math.random() * 5 + 5 + 's';
+
+      document.body.appendChild(shape);
+
+      setTimeout(() => {
+        shape.remove();
+      }, 10000);
+    }
+
+    setInterval(createShape, 200);
+
+    const loveNotes = [
+      "Every second I spend with you is like a star lighting up my sky.",
+      "You're not just in my heart, you *are* my heart.",
+      "If I had a diamond for every time I thought of you, I'd own the universe.",
+      "You're the most beautiful shape in my world, perfect in every curve.",
+      "No circle, star, heart, or gem compares to the beauty of your soul.",
+      "Even if the stars disappeared, your light would be enough."
+    ];
+
+    const btn = document.getElementById('loveNoteBtn');
+    const noteBox = document.getElementById('noteBox');
+
+    btn.addEventListener('click', () => {
+      const random = Math.floor(Math.random() * loveNotes.length);
+      noteBox.textContent = loveNotes[random];
+    });
+  </script>
+</body>
+</html>
